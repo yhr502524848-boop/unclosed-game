@@ -173,3 +173,60 @@ add('memory_chat','会话-R5S','下雨那天的会话','十一月十八日','复
 story.records.content_catalog.items=['order_aug','order_sep','order_late_sep','order_oct','order_nov','edit'];
 for(const id of story.records.content_catalog.items)story.records[id].category='归岸内容工作单';
 for(const [id,record] of Object.entries(story.records))record.access=story.publicRecords.includes(id)?'public':record.gate==='shift'?'internal':record.gate?'private':'duty';
+
+// Investigation revision: evidence stays gated; discovered titles can be tracked.
+story.revision=5;
+story.stages[2].required=['trip','photo','roster','departure','signoff'];
+story.stages[4].title='知遥的工单';
+story.records.xu_public_album.date='三月至十一月';
+story.records.diary_letter.body=story.records.diary_letter.body.replace('十号以前','10/10 以前');
+story.records.plan.body=story.records.plan.body.replaceAll('十号','11/10').replaceAll('二十二号','11/22');
+story.records.promise.body=story.records.promise.body.replaceAll('十号','11/10').replaceAll('二十二号','11/22');
+story.records.signal.source='余声会话导出 / 录音转写 / 来源待核';
+story.records.original.source='复核卷 / 当事人提交的录音转写';
+story.records.promise.source='复核卷 / 当事人提交的语音转写';
+story.records.photo.body+='<p>随相册提交的附件：生日照片之后（摘页）。仅此页获准随相册查看，其余日记仍加密。</p>';
+story.records.photo.links.push('diary_excerpt');
+add('diary_excerpt','摘页-F2H','生日照片之后（摘页）','四月十七日','本人授权随相册提交 / 日记摘页',1,story.records.diary_birthday.body,[],['生日照片之后','日记摘页']);
+story.records.diary_excerpt.access='duty';
+story.records.backup.body+='<p>封存时的手写备注：“和我个人日记用同一组四位数。换工作机的时候没换。”</p>';
+story.records.xu_diary_entry.body+='<p>旧设备迁移留言：“四位数没改，工作台也是这一组。”</p>';
+story.records.appeal.body=story.records.appeal.body.replace('平台异议留言（系统留存文字）','平台异议留言（收件号 YY-1117-46，提交人待核）');
+story.records.audit.body+='<p>另附本案的异议留言流转单，可核对会话导出的来源。</p>';
+story.records.audit.links.push('provenance');
+add('provenance','流转-J7C','异议留言流转单','十一月十七日至二十一日','余声复核留存 / 接收凭据与导出更正',5,
+'<table class="archive-table"><tbody><tr><th>11/17 21:43</th><td>异议收件 YY-1117-46；入口：申请人文字留言；内容以“我没有死”开头，提及门口两只箱子。</td></tr><tr><th>11/17 21:46</th><td>复核音频导出：将留言原文交由该账户的数字声线朗读，供案卷回放；未调用客户问答生成。</td></tr><tr><th>导出标记</th><td>沿用“数字知遥 / 会话输出”；遗漏“申请人留言转读”来源字段。</td></tr><tr><th>11/21</th><td>申请人到场提交原设备。窗口核对发送留存及收件号一致，确认提交人为许知遥本人。</td></tr></tbody></table><p>更正：回放中的声音为合成，文字由本人提交。申请人留言未加入客户人格的生活记忆库。原导出及更正说明同时保存，参见来自数字知遥的异常留言、更正回执。</p>',[],['异议留言流转单','YY-1117-46'],'staff');
+story.records.provenance.access='private';
+story.stages[4].required.push('provenance');
+story.stages[4].facts.push('开场求救由许知遥本人提交，复核导出用数字声线朗读，来源标签遗漏造成误认；客户人格没有因此获得真人的新记忆。');
+story.records.request.body=story.records.request.body.replace('</p>', '</p><p>客户缴费 1,800 元，项目：关系表达整理；结算备注：11-B 批次另有反向付款，见后续客户移交要求。</p>');
+story.records.batch.body='<table class="archive-table"><thead><tr><th>批次 / 条目</th><th>付款方 → 收款方</th><th>金额 / 事项</th><th>状态</th></tr></thead><tbody><tr><td>11-B / 许知遥</td><td>陆维真 → 归岸</td><td>1,800 元 / 关系表达整理</td><td>已交付</td></tr><tr><td>11-B / 许知遥</td><td>归岸 → 陆维真</td><td>72,000 元 / 后续人员移交协作预付款</td><td>未接收本人；已收到本人反对</td></tr><tr><td>11-B / BQ-14</td><td>白桥接收方 → 归岸</td><td>216,000 元 / 人员接收</td><td>见白桥交付、白桥接收回执</td></tr><tr><td>11-B / YT-16</td><td>申请方 → 归岸</td><td>98,000 元 / 死亡状态及配套资料</td><td>见远汀结项</td></tr></tbody></table><p>许知遥条目：已付陆维真，人尚未接走。结算备注：后续接收方拟按白桥标准付费，尚未到账。1,800 元为独立内容服务收入，不能冲抵协作款。</p><p>本人异议转呈后的处理意见：合作处理意见。</p>';
+story.records.living.body='<table class="archive-table"><tbody><tr><th>条目</th><td>BQ-14 / 批次 11-B</td></tr><tr><th>交接日期</th><td>11/14</td></tr><tr><th>移交对象</th><td>1 人；账户尾号 6208</td></tr><tr><th>到场备注</th><td>本人持续要求联系家属；接收方签收，未取得本人同意。</td></tr></tbody></table><p>结算关联：白桥接收回执。外部补件：外部失踪案核对。</p>';
+story.records.receipt.body='<table class="archive-table"><tbody><tr><th>条目</th><td>BQ-14 / 批次 11-B</td></tr><tr><th>日期</th><td>11/15（对应 11/14 接收）</td></tr><tr><th>数量</th><td>1 人；账户尾号 6208</td></tr><tr><th>付款</th><td>接收方 → 归岸，216,000 元</td></tr><tr><th>结算事项</th><td>人员接收；无数字内容交付项</td></tr></tbody></table><p>接收方附言：原身份资料不要给本人。收款登记与同批交付对账对应。</p>';
+story.records.missing.body='<p>外部失踪案受理摘录（个人信息遮挡）</p><table class="archive-table"><tbody><tr><th>账户尾号</th><td>6208</td></tr><tr><th>家属陈述</th><td>仍在寻找本人，未同意死亡确认。</td></tr><tr><th>11/14 线索</th><td>车辆去向与白桥签收地点相同，待现场调查。</td></tr><tr><th>当前结论</th><td>单凭失踪登记不能认定交易性质；请附交接和付款原件供核查。</td></tr></tbody></table>';
+story.lockReasons={backup:'待完成旧档生活细节核对后调入。',batch:'待完成本案版本核对后调入。',luorder:'待调入客户移交续件；先核对本案已有记录。'};
+story.hints=[
+ ['先区分客户会话与原始语音：谁在说话？说的是哪一晚？','沿会话中的保全目录找到原录音，再核对内容工作单。','需要六号晚上的会话、六号原始语音和十二日整理单；询问数字知遥 11/6 后可比较关键句。'],
+ ['暂住、死亡申请和恢复账户是三件不同的事。','先看双方约定，再看陆维真实际提交的申请；私人备忘录的四位数与一段共同经历有关。','返回安排核对列有入手材料；下雨那天的会话可帮助推导备忘录密码。'],
+ ['物件相似之外，还能否对上日期、地点和经历？引介文件不必重复阅读。','分别核对量杯的细节，以及 3/12 的路线、时间和鞋。','旧排班需要当时负责的员工登录；读过夜班交接、清桌留言、三月排班留言、量杯里的花与三月十二日的聊天后，可以提交两组关联。'],
+ ['先验证旧工作与私人生活是否真的连在一起，再看她怎样处理他人的求助。','备份封存备注说明密码沿用关系；个人工作台的记忆可以解释那四位数。','将私人备份清单、数字知遥关于工作台的回答和生日片段联系起来；打开后沿来信与离职交接继续。'],
+ ['区分提出要求、执行改动、用改后记录核对三个环节。','对照处理前后版本，再找谁确认、谁执行、谁发出补件通知；开场留言也有来源待核。','客户移交要求、修改执行记录与更正回执能对应三个环节；异议留言流转单可以核清求救来源。'],
+ ['不同订单的钱从谁流向谁，交换的是什么？','比对同一条目的交付数量、日期、账号尾号与付款事项。','白桥交付和白桥接收回执可逐项对照，再与外部失踪案核对；远汀与外部案件通报是另一组材料。']
+];
+story.checkpoints={
+ 1:{title:'核对约定',intro:'选出同一约定中互相冲突的两句。',sources:['conversation','original','edit'],groups:[
+ {label:'客户会话中的回答',options:[['a','我们重新开始。'],['b','门口那两个箱子我还没动。'],['c','回来以后呢？']],answer:'a'},
+ {label:'原始语音中的对应说法',options:[['a','临住的东西不用拿太多。'],['b','回来以后各自搬走，这件事不变。'],['c','花早就干了。']],answer:'b'}]},
+ 3:{title:'核对两组关联',intro:'用已读材料建立两组独立关联，再确定目前能下到哪一步结论。',sources:['photo','trip','departure','signoff','roster'],groups:[
+ {label:'物件记录：选择相互对应的两份材料',type:'pair',answer:['photo','signoff']},
+ {label:'同一晚的经历：选择相互对应的两份材料',type:'pair',answer:['trip','departure']},
+ {label:'目前的判断',options:[['confirmed','已足以确认身份，无需更多原件。'],['tentative','存在两组关联，仍须私人原件验证。'],['unrelated','没有可以继续核对的联系。']],answer:'tentative'}]},
+ 5:{title:'核对更正受阻的链条',intro:'请根据材料填写各环节的责任方，并核对最初那段求救的来源。',sources:['before','after','luorder','audit','appeal','provenance'],groups:[
+ {label:'提出继续控制资料与后续安排的要求',options:[['lu','陆维真'],['xu','许知遥'],['tang','唐静']],answer:'lu'},
+ {label:'执行返回日期及约定改写',options:[['platform','余声复核窗口'],['tang','归岸经办唐静'],['ye','叶宁']],answer:'tang'},
+ {label:'据改后底档发出不一致的补件通知',options:[['platform','余声复核窗口'],['lu','陆维真'],['external','外部受理窗口']],answer:'platform'},
+ {label:'开场回放的文字与声音',options:[['generated','数字人格自行生成求救。'],['human','许知遥提交文字，复核导出用数字声线朗读。'],['lu','陆维真模仿知遥录制。']],answer:'human'}]}
+};
+story.topics['3/12']={label:'三月十二日',keys:['3/12','三月','青桥','鞋'],seen:['trip'],links:[],opens:[],text:['那晚雨很大，青桥站走不了。我给叶宁发了钟楼的位置，等她来接我。','一只鞋卡在水沟里了。我坐进车里，她先把暖风打开，连包里的纸都顾不上问。']};
+story.topics.signal_question={label:'关于那段留言',kind:'reflection',keys:['还活着','没有死','求救','为什么活着'],seen:['signal'],links:[],opens:[],text:['你说的那句话，我在这里找不到对应的生活片段。我能讲的，是留下来的那些事。']};
+story.topics.guian={label:'关于归岸',kind:'reflection',keys:['归岸'],seen:['conversation'],links:[],opens:[],text:['有些旧资料交给归岸整理过。具体经办的事情，我这里没有保存成生活片段。']};

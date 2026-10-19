@@ -1,0 +1,174 @@
+{
+  "version": 5,
+  "begun": true,
+  "stage": 6,
+  "read": [
+    "signal",
+    "conversation",
+    "index",
+    "request",
+    "original",
+    "edit",
+    "friend",
+    "plan",
+    "stay",
+    "promise",
+    "death",
+    "appeal",
+    "confront",
+    "roster",
+    "departure",
+    "signoff",
+    "backup",
+    "oldcase",
+    "oldreply",
+    "handoff",
+    "access",
+    "desk",
+    "own",
+    "before",
+    "after",
+    "audit",
+    "luorder",
+    "batch",
+    "living",
+    "fugitive",
+    "oversight",
+    "receipt",
+    "missing",
+    "notice"
+  ],
+  "asked": [
+    "11/6"
+  ],
+  "unlocked": [
+    "private",
+    "staff"
+  ],
+  "journal": [
+    {
+      "stage": 1,
+      "citations": [
+        "conversation",
+        "original",
+        "edit"
+      ]
+    },
+    {
+      "stage": 2,
+      "citations": [
+        "plan",
+        "promise",
+        "death",
+        "appeal",
+        "confront"
+      ]
+    },
+    {
+      "stage": 3,
+      "citations": [
+        "roster",
+        "departure",
+        "signoff"
+      ]
+    },
+    {
+      "stage": 4,
+      "citations": [
+        "oldcase",
+        "oldreply",
+        "handoff",
+        "access"
+      ]
+    },
+    {
+      "stage": 5,
+      "citations": [
+        "own",
+        "before",
+        "after",
+        "audit",
+        "luorder"
+      ]
+    },
+    {
+      "stage": 6,
+      "citations": [
+        "living",
+        "receipt",
+        "missing",
+        "fugitive",
+        "notice",
+        "oversight"
+      ]
+    }
+  ],
+  "notes": "保留我的旧笔记",
+  "history": [
+    {
+      "kind": "journal"
+    },
+    {
+      "kind": "record",
+      "id": "desk"
+    },
+    {
+      "kind": "record",
+      "id": "own"
+    },
+    {
+      "kind": "record",
+      "id": "before"
+    },
+    {
+      "kind": "record",
+      "id": "after"
+    },
+    {
+      "kind": "record",
+      "id": "audit"
+    },
+    {
+      "kind": "record",
+      "id": "luorder"
+    },
+    {
+      "kind": "journal"
+    },
+    {
+      "kind": "record",
+      "id": "batch"
+    },
+    {
+      "kind": "record",
+      "id": "living"
+    },
+    {
+      "kind": "record",
+      "id": "fugitive"
+    },
+    {
+      "kind": "record",
+      "id": "oversight"
+    },
+    {
+      "kind": "record",
+      "id": "receipt"
+    },
+    {
+      "kind": "record",
+      "id": "missing"
+    },
+    {
+      "kind": "record",
+      "id": "notice"
+    },
+    {
+      "kind": "journal"
+    }
+  ],
+  "view": {
+    "kind": "ending"
+  },
+  "ending": "full"
+}

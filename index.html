@@ -149,7 +149,7 @@ add('diary_boxes','日记-V9B','门口的箱子','十一月五日','许知遥 / 
 add('conversation','会话-K8D','六号晚上的会话','十一月十七日','',1,
 '<p class="human">陆维真：门口那两个箱子我还没动。你还记得六号晚上我们怎么说的吗？</p><p class="digital">暂时分开住，等你安排好，我就回来。</p><p class="human">陆维真：回来以后呢？</p><p class="digital">我们重新开始。</p><p class="muted">资料来源：保全目录 / 11/06。附客户提交的内容整理申请。</p>',['index','request'],['六号晚上的会话','陆维真','箱子']);
 add('index','索引-B9W','六号原始资料索引','十一月六日','保全目录',1,
-"<table class=\"archive-table\"><tbody><tr><th>参与人</th><td>许知遥、陆维真</td></tr><tr><th>录制日期</th><td>11/06</td></tr><tr><th>原始附件</th><td>语音 / 行李、临住、搬走</td></tr><tr><th>后续处理</th><td>归岸 / 内容工作单</td></tr></tbody></table>",['original','content_catalog'],['六号原始资料索引','保全目录']);
+"<table class=\"archive-table\"><tbody><tr><th>参与人</th><td>许知遥、陆维真</td></tr><tr><th>录制日期</th><td>11/06</td></tr><tr><th>原始附件</th><td>六号原始语音 / 行李、临住、搬走</td></tr><tr><th>后续处理</th><td>归岸 / 内容工作单</td></tr></tbody></table>",['original','content_catalog'],['六号原始资料索引','保全目录']);
 add('request','申请-F4R','内容整理申请','十一月十八日','客户申请副本',1,
 "<p>陆维真：“我们一直很好。最近她又提搬走，请沿用十二日整理单的方式。”</p><p>服务商：归岸。相关处理记录收在归岸内容工作单中。</p>",['content_catalog'],['内容整理申请']);
 add('original','语音-T2X','六号原始语音','十一月六日','复核卷 / 当事人提交的录音',1,
@@ -279,7 +279,7 @@ story.records.receipt.body='<table class="archive-table"><tbody><tr><th>条目</
 story.records.missing.body='<p>外部失踪案受理摘录（个人信息遮挡）</p><table class="archive-table"><tbody><tr><th>账户尾号</th><td>6208</td></tr><tr><th>家属陈述</th><td>仍在寻找本人，未同意死亡确认。</td></tr><tr><th>11/14 线索</th><td>车辆去向与白桥签收地点相同，待现场调查。</td></tr><tr><th>当前结论</th><td>单凭失踪登记不能认定交易性质；请附交接和付款原件供核查。</td></tr></tbody></table>';
 story.lockReasons={backup:'待完成旧档生活细节核对后调入。',batch:'待完成本案版本核对后调入。',luorder:'待调入客户移交续件；先核对本案已有记录。'};
 story.hints=[
- ['先区分客户会话与原始语音：谁在说话？说的是哪一晚？','沿会话中的保全目录找到原录音，再核对内容工作单。','需要六号晚上的会话、六号原始语音和十二日整理单；询问数字知遥 11/6 后可比较关键句。'],
+ ['先区分客户会话与原始语音：谁在说话？说的是哪一晚？','沿会话中的保全目录找到原录音，再核对内容工作单。'],
  ['暂住、死亡申请和恢复账户是三件不同的事。','先看双方约定，再看陆维真实际提交的申请；私人备忘录的四位数与一段共同经历有关。','返回安排核对列有入手材料；下雨那天的会话可帮助推导备忘录密码。'],
  ['物件相似之外，还能否对上日期、地点和经历？引介文件不必重复阅读。','分别核对量杯的细节，以及 3/12 的路线、时间和鞋。','旧排班需要当时负责的员工登录；读过夜班交接、清桌留言、三月排班留言、量杯里的花与三月十二日的聊天后，可以提交两组关联。'],
  ['先验证旧工作与私人生活是否真的连在一起，再看她怎样处理他人的求助。','备份封存备注说明密码沿用关系；个人工作台的记忆可以解释那四位数。','将私人备份清单、数字知遥关于工作台的回答和生日片段联系起来；打开后沿来信与离职交接继续。'],
@@ -341,7 +341,7 @@ function createGame(data,saved){
  function ask(raw){if(!personaUnlocked())return 'blocked';const input=String(raw).trim(),q=normalize(input);s.drafts.persona=input;if(!q)return 'empty';const m=dates(q).match(/@(\d+\/\d+)@/);const topic=m?topics().find(key=>key===m[1]):topics().map(key=>({key,score:Math.max(0,...data.topics[key].keys.filter(word=>q.includes(word)).map(word=>word.length))})).filter(t=>t.score).sort((a,b)=>b.score-a.score)[0]?.key;
  s.questions.push({input,topic:topic||null});s.questions=s.questions.slice(-100);if(topic){const previous=s.asked.indexOf(topic);if(previous>=0)s.asked.splice(previous,1);s.asked.push(topic);}go({kind:'persona'});return topic||'none';}
  function login(key,account,password){if(!canGate(key))return false;const g=data.gates[key];if(String(account).trim()!==g.account||String(password).trim()!==g.password)return false;if(!s.unlocked.includes(key))s.unlocked.push(key);go({kind:'record',id:g.root});return true;}
- function ready(){return stage().required.every(id=>s.read.includes(id)||(restoring&&grandfather.includes(s.stage)&&id==='provenance'))&&(s.stage!==1||s.asked.includes('11/6'));}
+ function ready(){return stage().required.every(id=>s.read.includes(id)||(restoring&&grandfather.includes(s.stage)&&id==='provenance'));}
  function checkpointPass(n,answers){const cp=data.checkpoints[n];return !!cp&&Array.isArray(answers)&&cp.groups.every((group,i)=>group.type==='pair'?Array.isArray(answers[i])&&answers[i].length===2&&new Set(answers[i]).size===2&&group.answer.every(id=>answers[i].includes(id)):answers[i]===group.answer);}
  function submitCheck(answers){if(!ready()||!checkpointPass(s.stage,answers))return false;s.checks=s.checks.filter(c=>c.stage!==s.stage);s.checks.push({stage:s.stage,answers:JSON.parse(JSON.stringify(answers))});autoArchive();return true;}
  function autoArchive(){if(!s.begun||!ready()||complete(s.stage))return;const check=s.checks.find(c=>c.stage===s.stage);if(data.checkpoints[s.stage]&&!checkpointPass(s.stage,check?.answers)&&!(restoring&&grandfather.includes(s.stage)))return;s.journal.push({stage:s.stage,citations:stage().required.filter(id=>s.read.includes(id)),...(check?{answers:check.answers}:grandfather.includes(s.stage)?{inherited:true}:{})});}
